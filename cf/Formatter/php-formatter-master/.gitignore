@@ -1,0 +1,7 @@
+/vendor
+/bin/*
+!/bin/compile
+!/bin/php-formatter
+composer.phar
+composer.lock
+phpunit.xml

@@ -1,0 +1,80 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "test4",
+      "request": "launch",
+      "mainClass": "Test.test4",
+      "projectName": "Server_82180824"
+    },
+    {
+      "type": "java",
+      "name": "test3",
+      "request": "launch",
+      "mainClass": "Test.test3",
+      "projectName": "Server_82180824"
+    },
+    {
+      "type": "java",
+      "name": "Test1",
+      "request": "launch",
+      "mainClass": "Test.Test1",
+      "projectName": "Server_82180824"
+    },
+    {
+      "type": "java",
+      "name": "test2",
+      "request": "launch",
+      "mainClass": "Test.test2",
+      "projectName": "Server_82180824"
+    },
+    {
+      "type": "java",
+      "name": "test",
+      "request": "launch",
+      "mainClass": "Test.test",
+      "projectName": "Server_82180824"
+    },
+    {
+      "type": "java",
+      "name": "test1",
+      "request": "launch",
+      "mainClass": "Test.test1",
+      "projectName": "Server_82180824"
+    },
+    {
+      "type": "java",
+      "name": "test",
+      "request": "launch",
+      "mainClass": "test",
+      "projectName": "Server_82180824"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "Server_82180824"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "s:/StudyFiles/SGU/2023-2024-HK1/LTUDM/3.Project/Workspace/FinalProject/Server/test_program/C",
+      "program": "s:/StudyFiles/SGU/2023-2024-HK1/LTUDM/3.Project/Workspace/FinalProject/Server/test_program/C/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
