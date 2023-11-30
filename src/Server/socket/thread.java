@@ -200,12 +200,12 @@ public class thread implements Runnable {
 					// process = pb.start();
 					// exitedCode = process.waitFor();
 					// if (exitedCode == 0) {
-						command = "java";
-						pb.command("cmd.exe", "/c", command + " " + filePath + " 2>&1");
-						process = pb.start();
-						pb.redirectErrorStream(true);
-						ph = process.toHandle();
-						stopProcess("taskkill /IM " + ph.pid() + " /F /T");
+					command = "java";
+					pb.command("cmd.exe", "/c", command + " " + filePath + " 2>&1");
+					process = pb.start();
+					pb.redirectErrorStream(true);
+					ph = process.toHandle();
+					stopProcess("taskkill /IM " + ph.pid() + " /F /T");
 					// } 
 					break;
 				default:
@@ -229,12 +229,10 @@ public class thread implements Runnable {
 			if (exitedCode == 0) codeResult.setFormattedSrc(format(code));
 			else codeResult.setFormattedSrc(src);
 
-			// if (!lang.equals("C"))
+			if (lines.length() > 1000000)
+				codeResult.setExecResult("Exited code: " + exitedCode);
+			else	
 				codeResult.setExecResult(lines);
-			// else if (exitedCode == 0)
-			// 	codeResult.setExecResult(lines);
-			// else
-			// 	codeResult.setExecResult("Exited code: " + exitedCode);
 
 			send(codeResult);
 		} catch (Exception e) {

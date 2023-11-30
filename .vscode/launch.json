@@ -64,8 +64,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "s:/StudyFiles/SGU/2023-2024-HK1/LTUDM/3.Project/Workspace/FinalProject/Server/src/Server/temp",
-      "program": "s:/StudyFiles/SGU/2023-2024-HK1/LTUDM/3.Project/Workspace/FinalProject/Server/src/Server/temp/build/Debug/outDebug",
+      "cwd": "s:/StudyFiles/SGU/2023-2024-HK1/LTUDM/3.Project/Workspace/FinalProject/Server/test_program/C",
+      "program": "s:/StudyFiles/SGU/2023-2024-HK1/LTUDM/3.Project/Workspace/FinalProject/Server/test_program/C/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
