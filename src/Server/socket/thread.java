@@ -229,12 +229,12 @@ public class thread implements Runnable {
 			if (exitedCode == 0) codeResult.setFormattedSrc(format(code));
 			else codeResult.setFormattedSrc(src);
 
-			if (!lang.equals("C"))
+			// if (!lang.equals("C"))
 				codeResult.setExecResult(lines);
-			else if (exitedCode == 0)
-				codeResult.setExecResult(lines);
-			else
-				codeResult.setExecResult("Exited code: " + exitedCode);
+			// else if (exitedCode == 0)
+			// 	codeResult.setExecResult(lines);
+			// else
+			// 	codeResult.setExecResult("Exited code: " + exitedCode);
 
 			send(codeResult);
 		} catch (Exception e) {
@@ -249,7 +249,7 @@ public class thread implements Runnable {
 		
 		Timer timer = new Timer();
 		TimeOutTask timeOutTask = new TimeOutTask(thread, timer);
-		timer.schedule(timeOutTask, 3000);
+		timer.schedule(timeOutTask, 2000);
  
 		// StopProcess sp = new StopProcess(process);
 		// SwingWorker sw = new SwingWorker<Void,Void>() {
