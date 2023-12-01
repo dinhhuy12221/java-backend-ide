@@ -23,6 +23,7 @@ public class server {
 	public void connect() {
 		try {
 			this.serverSocket = new ServerSocket(this.port);
+			System.out.println("Server is waiting...");
 			writeToLog("[Notification] Server: " + this.serverSocket + " is opening....");
 			while (true) {
 				this.socket = this.serverSocket.accept();

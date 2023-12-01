@@ -164,18 +164,12 @@ public class thread implements Runnable {
 				case "Java":
 					filePath += ".java";
 					writeToFile(filePath, src);
-					// command = "javac";
-					// pb.command("cmd.exe", "/c", command + " " + filePath + " 2>&1");
-					// process = pb.start();
-					// exitedCode = process.waitFor();
-					// if (exitedCode == 0) {
 					command = "java";
 					pb.command("cmd.exe", "/c", command + " " + filePath + " 2>&1");
 					process = pb.start();
 					pb.redirectErrorStream(true);
 					ph = process.toHandle();
 					stopProcess("taskkill /IM " + ph.pid() + " /F /T");
-					// } 
 					break;
 				default:
 					break;
@@ -198,7 +192,7 @@ public class thread implements Runnable {
 			if (exitedCode == 0) codeResult.setFormattedSrc(format(code, index));
 			else codeResult.setFormattedSrc(src);
 
-			if (lines.length() > 1000000)
+			if (lines.length() > 10000000)
 				codeResult.setExecResult("Exited code: " + exitedCode);
 			else	
 				codeResult.setExecResult(lines);
@@ -220,7 +214,6 @@ public class thread implements Runnable {
 
 	private String format(Code code, int index) {
 		try {
-			Random rd = new Random();
 			String filePath = ".\\src\\Server\\temp\\" + index;
 			ProcessBuilder pb = new ProcessBuilder();
 			String lang = code.getLanguage(), src = code.getSource();
@@ -231,7 +224,7 @@ public class thread implements Runnable {
 					filePath += ".c";
 					writeToFile(filePath, src);
 					command = ".\\cf\\Formatter\\astyle-3.4.10-x64\\astyle.exe";
-					pb.command("cmd.exe", "/c", command + " -H -U -xe -p -f -E -n -A1 " + filePath);
+					pb.command("cmd.exe", "/c", command + " --mode=c -H -U -xe -p -f -E -n -o -A1 " + filePath);
 					pb.start();
 					break;
 				case "Python":
@@ -241,25 +234,18 @@ public class thread implements Runnable {
 					pb.command("cmd.exe", "/c", command + " " + filePath);
 					pb.start();
 					break;
-				case "PHP":
-					command = "";
-					filePath += ".php";
-					writeToFile(filePath, src);
-					pb.command("cmd.exe", "/c", command + " " + filePath + " > " + filePath);
-					pb.start();
-					break;
 				case "Javascript":
 					command = ".\\cf\\Formatter\\astyle-3.4.10-x64\\astyle.exe";
 					filePath += ".js";
 					writeToFile(filePath, src);
-					pb.command("cmd.exe", "/c", command + " -H -U -xe -p -f -E -n -A1 " + filePath);
+					pb.command("cmd.exe", "/c", command + " --mode=js -H -U -xe -p -f -E -n -o -A1 " + filePath);
 					pb.start();
 					break;
 				case "Java":
 					command = ".\\cf\\Formatter\\astyle-3.4.10-x64\\astyle.exe";
 					filePath += ".java";
 					writeToFile(filePath, src);
-					pb.command("cmd.exe", "/c", command + " -H -U -xe -p -f -E -n " + filePath);
+					pb.command("cmd.exe", "/c", command + " --mode=java -H -U -xe -p -f -E -n -o " + filePath);
 					pb.start();
 					break;
 			}
