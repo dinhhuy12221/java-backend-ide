@@ -114,7 +114,7 @@ public class thread implements Runnable {
 		CodeResult codeResult = new CodeResult();
 		try {
 			Random rd = new Random();
-			int index = rd.nextInt(100000) + 900000;
+			String index = rd.nextInt(9000000) + 1000000 + "";
 			String filePath = ".\\src\\Server\\temp\\" + index;
 			String lang = code.getLanguage() , src = code.getSource(), input = code.getInput();
 			String command = "", lines = "";
@@ -192,7 +192,7 @@ public class thread implements Runnable {
 			if (exitedCode == 0) codeResult.setFormattedSrc(format(code, index));
 			else codeResult.setFormattedSrc(src);
 
-			if (lines.length() > 10000000)
+			if (lines.length() > 1000000)
 				codeResult.setExecResult("Exited code: " + exitedCode);
 			else	
 				codeResult.setExecResult(lines);
@@ -212,7 +212,7 @@ public class thread implements Runnable {
 		timer.schedule(timeOutTask, 2000);
 	}
 
-	private String format(Code code, int index) {
+	private String format(Code code, String index) {
 		try {
 			String filePath = ".\\src\\Server\\temp\\" + index;
 			ProcessBuilder pb = new ProcessBuilder();
@@ -224,7 +224,7 @@ public class thread implements Runnable {
 					filePath += ".c";
 					writeToFile(filePath, src);
 					command = ".\\cf\\Formatter\\astyle-3.4.10-x64\\astyle.exe";
-					pb.command("cmd.exe", "/c", command + " --mode=c -H -U -xe -p -f -E -n -o -A1 " + filePath);
+					pb.command("cmd.exe", "/c", command + " --mode=java -H -U -xe -p -f -E -n -o " + filePath);
 					pb.start();
 					break;
 				case "Python":
@@ -238,14 +238,15 @@ public class thread implements Runnable {
 					command = ".\\cf\\Formatter\\astyle-3.4.10-x64\\astyle.exe";
 					filePath += ".js";
 					writeToFile(filePath, src);
-					pb.command("cmd.exe", "/c", command + " --mode=js -H -U -xe -p -f -E -n -o -A1 " + filePath);
+					pb.command("cmd.exe", "/c", command + " --mode=js  -H -U -xe -p -f -E -o " + filePath);
 					pb.start();
 					break;
 				case "Java":
 					command = ".\\cf\\Formatter\\astyle-3.4.10-x64\\astyle.exe";
 					filePath += ".java";
 					writeToFile(filePath, src);
-					pb.command("cmd.exe", "/c", command + " --mode=java -H -U -xe -p -f -E -n -o " + filePath);
+					pb.command("cmd.exe", "/c", command + " --mode=java -H -U -xe -p -f -E -n -o -xL " + filePath);
+					System.out.println(1);
 					pb.start();
 					break;
 			}
