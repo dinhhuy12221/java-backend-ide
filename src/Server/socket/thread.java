@@ -1,6 +1,7 @@
 package Server.socket;
 
 import java.io.*;
+
 import javax.swing.SwingWorker;
 import java.lang.ProcessBuilder.Redirect;
 import java.net.Socket;
@@ -17,6 +18,7 @@ import org.json.JSONObject;
 import org.apache.commons.lang3.arch.Processor;
 import org.apache.commons.lang3.arch.Processor.Arch;
 import org.apache.commons.lang3.arch.Processor.Type;
+import org.apache.commons.lang3.reflect.FieldUtils;
 
 import Object.Code;
 import Object.CodeResult;
@@ -26,6 +28,7 @@ public class thread implements Runnable {
 	private ObjectInputStream in = null;
 	private ObjectOutputStream out = null;
 	private encryption encryption;
+	private LogFileHelper logFileHelper; 
 
 	public thread(Socket socket) {
 		try {
@@ -33,6 +36,8 @@ public class thread implements Runnable {
 			this.out = new ObjectOutputStream(this.socket.getOutputStream());
 			this.in = new ObjectInputStream(this.socket.getInputStream());
 			generateKey();
+			writeToLog("[Notification] Client: " + this.socket + " is connected");
+		} catch(java.net.SocketException e) {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -61,30 +66,30 @@ public class thread implements Runnable {
 			byte[] bytes = encryption.encryptData(codeResult);
 			this.out.writeObject(bytes);
 			this.out.flush();
-		} catch (java.net.SocketException e) {
+		} catch (java.net.SocketException | java.lang.NullPointerException e) {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void send(String str) {
-		try {
-			byte[] bytes = encryption.encryptData(str);
-			this.out.writeObject(bytes);
-			this.out.flush();
-		} catch (java.net.SocketException e) {
-			System.out.println("[Notification] Client: " + this.socket + " lost connection");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	// public void send(String str) {
+	// 	try {
+	// 		byte[] bytes = encryption.encryptData(str);
+	// 		this.out.writeObject(bytes);
+	// 		this.out.flush();
+	// 	} catch (java.net.SocketException | java.lang.NullPointerException e) {
+	// 		System.out.println("[Notification] Client: " + this.socket + " lost connection");
+	// 	} catch (Exception e) {
+	// 		e.printStackTrace();
+	// 	}
+	// }
 
 	public Object receive() {
 		try {
 			byte[] bytes = (byte[]) this.in.readObject();
 			Object object = (Object) encryption.decryptData(bytes);
 			return object;
-		} catch (java.net.SocketException e) {
+		} catch (java.net.SocketException | java.lang.NullPointerException e) {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -122,8 +127,10 @@ public class thread implements Runnable {
 				if (object != null) {
 					Code code = (Code) object;
 					execute(code);
-				} else
+				} else {
+					writeToLog("[Notification] Client: " + this.socket + " lost connection");
 					break;
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				break;
@@ -351,20 +358,13 @@ public class thread implements Runnable {
 		return lines;
 	}
 
-// 	public static String getOutputFromProgram(String program) throws IOException {
-//     Process proc = Runtime.getRuntime().exec(program);
-//     return Stream.of(proc.getErrorStream(), proc.getInputStream()).parallel().map((InputStream isForOutput) -> {
-//         StringBuilder output = new StringBuilder();
-//         try (BufferedReader br = new BufferedReader(new InputStreamReader(isForOutput))) {
-//             String line;
-//             while ((line = br.readLine()) != null) {
-//                 output.append(line);
-//                 output.append("\n");
-//             }
-//         } catch (IOException e) {
-//             throw new RuntimeException(e);
-//         }
-//         return output;
-//     }).collect(Collectors.joining());
-// }
+	private void writeToLog(String line) {
+		try {
+			logFileHelper = new LogFileHelper(new File(".\\src\\Server\\socket\\log.txt"));
+			logFileHelper.tryWriteLine("[Notification] Client: " + this.socket + " connected");
+			logFileHelper.tryClose();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 }
