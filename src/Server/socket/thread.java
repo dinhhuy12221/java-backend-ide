@@ -1,24 +1,8 @@
 package Server.socket;
 
 import java.io.*;
-
-import javax.swing.SwingWorker;
-import java.lang.ProcessBuilder.Redirect;
 import java.net.Socket;
-import java.security.PublicKey;
 import java.util.*;
-import java.util.logging.StreamHandler;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.net.http.*;
-import java.net.http.HttpRequest.*;
-import java.net.URI;
-
-import org.json.JSONObject;
-import org.apache.commons.lang3.arch.Processor;
-import org.apache.commons.lang3.arch.Processor.Arch;
-import org.apache.commons.lang3.arch.Processor.Type;
-import org.apache.commons.lang3.reflect.FieldUtils;
 
 import Object.Code;
 import Object.CodeResult;
@@ -66,30 +50,18 @@ public class thread implements Runnable {
 			byte[] bytes = encryption.encryptData(codeResult);
 			this.out.writeObject(bytes);
 			this.out.flush();
-		} catch (java.net.SocketException | java.lang.NullPointerException e) {
+		} catch (java.net.SocketException | java.lang.NullPointerException | java.io.EOFException e) {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
-	// public void send(String str) {
-	// 	try {
-	// 		byte[] bytes = encryption.encryptData(str);
-	// 		this.out.writeObject(bytes);
-	// 		this.out.flush();
-	// 	} catch (java.net.SocketException | java.lang.NullPointerException e) {
-	// 		System.out.println("[Notification] Client: " + this.socket + " lost connection");
-	// 	} catch (Exception e) {
-	// 		e.printStackTrace();
-	// 	}
-	// }
 
 	public Object receive() {
 		try {
 			byte[] bytes = (byte[]) this.in.readObject();
 			Object object = (Object) encryption.decryptData(bytes);
 			return object;
-		} catch (java.net.SocketException | java.lang.NullPointerException e) {
+		} catch (java.net.SocketException | java.lang.NullPointerException | java.io.EOFException e) {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -142,7 +114,7 @@ public class thread implements Runnable {
 		CodeResult codeResult = new CodeResult();
 		try {
 			Random rd = new Random();
-			String index = rd.nextInt(100000) + 900000 + "";
+			int index = rd.nextInt(100000) + 900000;
 			String filePath = ".\\src\\Server\\temp\\" + index;
 			String lang = code.getLanguage() , src = code.getSource(), input = code.getInput();
 			String command = "", lines = "";
@@ -179,16 +151,6 @@ public class thread implements Runnable {
 					ph = process.toHandle();
 					stopProcess("taskkill /IM " + ph.pid() + " /F /T");
 					break;
-				// case "PHP":
-				// 	command = ".\\cf\\Compiler\\php-8.2.12-nts-Win32-vs16-x64\\php.exe";
-				// 	filePath += ".php";
-				// 	writeToFile(filePath, src);
-				// 	pb.command("cmd.exe", "/c", command + " " + filePath + " 2>&1");
-				// 	process = pb.start();
-				// 	pb.redirectErrorStream(true);
-				// 	ph = process.toHandle();
-				// 	stopProcess("taskkill /IM " + ph.pid() + " /F /T");
-				// 	break;
 				case "Javascript":
 					command = "node";
 					filePath += ".js";
@@ -233,7 +195,7 @@ public class thread implements Runnable {
 			
 			int exitedCode = process.waitFor();
 			lines += "Exited code: " + exitedCode;
-			if (exitedCode == 0) codeResult.setFormattedSrc(format(code));
+			if (exitedCode == 0) codeResult.setFormattedSrc(format(code, index));
 			else codeResult.setFormattedSrc(src);
 
 			if (lines.length() > 1000000)
@@ -250,34 +212,15 @@ public class thread implements Runnable {
 	private void stopProcess(String fileExe){
 		StopProcess sp = new StopProcess(fileExe);
 		Thread thread = new Thread(sp);
-		// thread.start();
 		
 		Timer timer = new Timer();
 		TimeOutTask timeOutTask = new TimeOutTask(thread, timer);
 		timer.schedule(timeOutTask, 2000);
- 
-		// StopProcess sp = new StopProcess(process);
-		// SwingWorker sw = new SwingWorker<Void,Void>() {
-
-		// 	@Override
-		// 	protected Void doInBackground() throws Exception {
-		// 		Thread t = new Thread(sp); // myRunnable does your calculations
-
-		// 		long startTime = System.currentTimeMillis();
-		// 		long endTime = startTime + 3000;
-		// 		while (System.currentTimeMillis() < endTime);
-		// 		t.start();
-		// 		System.out.println("HEHHEHEEH");
-		// 		return null;
-		// 	}
-		// };
-		// sw.execute();
 	}
 
-	private String format(Code code) {
+	private String format(Code code, int index) {
 		try {
 			Random rd = new Random();
-			String index = rd.nextInt(100000) + 10000 + "";
 			String filePath = ".\\src\\Server\\temp\\" + index;
 			ProcessBuilder pb = new ProcessBuilder();
 			String lang = code.getLanguage(), src = code.getSource();

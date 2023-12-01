@@ -1,40 +1,14 @@
-[Notification] Client: Socket[addr=/127.0.0.1,port=56835,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=56837,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=56835,localport=1234] lost connection
-[Notification] Client: Socket[addr=/127.0.0.1,port=56837,localport=1234] lost connection
-[Notification] Client: Socket[addr=/127.0.0.1,port=56854,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=56857,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=56854,localport=1234] lost connection
-[Notification] Client: Socket[addr=/127.0.0.1,port=56857,localport=1234] lost connection
-[Notification] Client: Socket[addr=/127.0.0.1,port=56864,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=56868,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=56864,localport=1234] lost connection
-[Notification] Client: Socket[addr=/127.0.0.1,port=56868,localport=1234] lost connection
-[Notification] Client: Socket[addr=/127.0.0.1,port=56879,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=56884,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=56884,localport=1234] lost connection
-[Notification] Client: Socket[addr=/127.0.0.1,port=56879,localport=1234] lost connection
-[Notification] Client: Socket[addr=/127.0.0.1,port=56974,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=56974,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=56984,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=56986,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=56986,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=56984,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57021,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57022,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57024,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57029,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57030,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57035,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57037,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57101,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57102,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57103,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57104,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57105,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57109,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57112,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57113,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57114,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57115,localport=1234] connected
-[Notification] Client: Socket[addr=/127.0.0.1,port=57148,localport=1234] connected
+[Notification] Server: ServerSocket[addr=0.0.0.0/0.0.0.0,localport=1234] is opening....
+[Notification] Client: Socket[addr=/127.0.0.1,port=53210,localport=1234] connected
+[Notification] Client: Socket[addr=/127.0.0.1,port=53211,localport=1234] connected
+[Notification] Server: ServerSocket[addr=0.0.0.0/0.0.0.0,localport=1234] is opening....
+[Notification] Client: Socket[addr=/127.0.0.1,port=53308,localport=1234] connected
+[Notification] Client: Socket[addr=/127.0.0.1,port=53309,localport=1234] connected
+[Notification] Client: Socket[addr=/127.0.0.1,port=53309,localport=1234] connected
+[Notification] Client: Socket[addr=/127.0.0.1,port=53308,localport=1234] connected
+[Notification] Client: Socket[addr=/127.0.0.1,port=53350,localport=1234] connected
+[Notification] Client: Socket[addr=/127.0.0.1,port=53350,localport=1234] connected
+[Notification] Client: Socket[addr=/127.0.0.1,port=53357,localport=1234] connected
+[Notification] Client: Socket[addr=/127.0.0.1,port=53357,localport=1234] connected
+[Notification] Client: Socket[addr=/127.0.0.1,port=53369,localport=1234] connected
+[Notification] Client: Socket[addr=/127.0.0.1,port=53369,localport=1234] connected
